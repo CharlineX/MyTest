@@ -4,14 +4,23 @@
 function l(){
 	return console.log(...arguments);
 }
-Array.prototype.s=function(){
-	return this.push(...arguments);
+// Array.prototype.s=function(){
+// 	return this.push(...arguments);
+// }
+// const arr=[1,2];arr.s(3);
+// l(arr);
+// {
+// 	let a=10;
+// 	var b=1;
+// }
+// console.log(b);
+// l(b);
+function bar(x=y,y=2){
+	return [x,y]
 }
-const arr=[1,2];arr.s(3);
-l(arr);
-{
-	let a=10;
-	var b=1;
+l(bar());
+
+function bar1(a=2,b=a){
+ 	return [a,b]
 }
-console.log(b);
-l(b);
+l(bar1());
