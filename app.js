@@ -24,3 +24,22 @@ function bar1(a=2,b=a){
  	return [a,b]
 }
 l(bar1());
+
+//?
+function f(){
+	l('I am outside!')
+}
+(function(){
+	// function f(){
+	// 	l('I am inside!')
+	// }
+	// if(false){}
+	f();
+}());
+
+
+let x=do{
+	let t = 2;
+	t*t+1;
+}
+l(x);
