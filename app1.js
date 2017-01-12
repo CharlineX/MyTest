@@ -1,23 +1,29 @@
 import "babel-polyfill";
 import express from "express";
-import {readFile} from "fs";
-function l(){
-	return console.log(...arguments);
-}
-const readFileAsync=path=>new Promise((resolve,reject) =>{
-	readFile(path,"utf-8",(err,file)=>{
-		err && reject(err);
-		resolve(file);
-	});
-});
+import {l,createHTML} from "./utils"
 express()
-	.get("/",async(req,res)=>{
-		res.send((await Promise.all([
-			readFileAsync("./package.json"),
-			readFileAsync("./server.js"),
-			readFileAsync("./app1.js")
-		])).join(""));
+	.use(express.static("./static"))
+	.get("/",async (req,res)=>{
+		res.send(await createHTML({
+			title:"友友之家",
+			styles:["/index.css","/first.css"],
+			scripts:["/index.js","/first.js"],
+			path:"./page/index.html"
+		}));
+		// res.send((await Promise.all([
+		// 	readFileAsync("./package.json"),
+		// 	readFileAsync("./server.js"),
+		// 	readFileAsync("./app1.js")
+		// ])).join(""));
 		// res.json(await readFileAsync("./package.json"));
+	})
+	.get("/active",async (req,res)=>{
+		res.send(await createHTML({
+			title:"朋朋之家",
+			styles:["/index.css","/first.css"],
+			scripts:["/index.js","/first.js"],
+			path:"./page/active.html"
+		}));
 	})
 	.listen(23333,l("success"));
 // const getJson = (url,{method,headers,body}) => new Promise((resolve,reject) =>{
