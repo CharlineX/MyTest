@@ -4,4 +4,4 @@ require("babel-register")({
 		"stage-0"
 	]
 });
-require("./app.js");
+require("./app1.js");
